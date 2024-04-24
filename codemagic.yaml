@@ -11,6 +11,6 @@ workflows:
       - name: Archive artifacts
         script: |
           mkdir -p $CM_BUILD_DIR/artifacts
-          mv app/build/outputs/apk/debug/*.apk $CM_BUILD_DIR/artifacts/
+          mv $CM_BUILD_DIR/app/build/outputs/apk/debug/*.apk $CM_BUILD_DIR/artifacts/
     artifacts:
-      - app/build/outputs/apk/debug/*.apk  # Adjust the path based on your build configuration
+      - $CM_BUILD_DIR/artifacts/*.apk  # Adjust the path based on your build configuration
