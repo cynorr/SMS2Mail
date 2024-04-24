@@ -1,0 +1,20 @@
+workflows:
+  primary:
+    name: Build and Test
+    environment:
+      vars:
+        GRADLE_OPTS: "-Dorg.gradle.daemon=false"  # Optional: Disable Gradle daemon
+    scripts:
+      - name: Install dependencies
+        script: |
+          flutter pub get  # If your project is a Flutter project, otherwise you can skip this step
+          # Install any other dependencies here if needed
+      - name: Build APK
+        script: |
+          ./gradlew assembleDebug  # Replace with assembleRelease for release build
+      - name: Archive artifacts
+        script: |
+          mkdir -p $CM_BUILD_DIR/artifacts
+          mv app/build/outputs/apk/debug/*.apk $CM_BUILD_DIR/artifacts/
+    artifacts:
+      - app/build/outputs/apk/debug/*.apk  # Adjust the path based on your build configuration
